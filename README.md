@@ -10,5 +10,6 @@ If this payment plugin was helpful for your business, please consider donating. 
 ## [Donate Now](https://technoidguru.com/pay.php?donations=true)
 
 ### Support
-Email me at own3mall@gmail.com
+
+Email me at own3mall(at)gmail(dot)com
 
