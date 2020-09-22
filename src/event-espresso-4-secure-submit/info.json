@@ -1,0 +1,15 @@
+{
+	"versionFile" : "eea-secure-submit-payment-method.php",
+	"slug" : "eea-secure-submit-payment-method",
+	"name" : "Event Espresso 4 Secure Submit (Heartland Payments) Payment Method",
+	"archiveBaseUrl" : "http://build.eventespresso.com/",
+	"archiveBasePath" : "~/www/build/",
+	"releaseFilesRemove" : [
+		"src/tests/**",
+		"src/info.json",
+		"src/circle.yml"
+	],
+	"github" : false,
+	"awsbucket" : "",
+	"awsregion" : ""
+}

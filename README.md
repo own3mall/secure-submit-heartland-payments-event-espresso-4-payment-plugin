@@ -1,2 +1,7 @@
-# secure-submit-heartland-payments-event-espresso-4-payment-plugin
-Secure Submit (Heartland Payments) Event Espresso 4 Payment Method Plugin
+Secure Submit Payment Method for EE4
+=========
+
+A plugin that provides the Secure Submit (Heartland Payments) payment method for EE4.
+
+Processes credit cards and gift cards via Secure Submit (Heartland Payments).
+
