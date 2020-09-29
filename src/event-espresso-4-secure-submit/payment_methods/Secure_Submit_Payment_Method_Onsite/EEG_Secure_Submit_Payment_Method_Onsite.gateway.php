@@ -159,7 +159,7 @@ class EEG_Secure_Submit_Payment_Method_Onsite extends EE_Onsite_Gateway{
 								if($balanceAmount > 0){						
 									$gcResponse = $gcService->sale($giftCard, $balanceAmount, 'usd');
 									$chargedGiftCard = true;
-									$result['txid'] = 'Gift Card TXN ID ' . $gcResponse->transactionId;
+									$result['txid'] = 'Gift Card Charged ' . $balanceAmount . ' with TXN ID ' . $gcResponse->transactionId;
 									$payment_data['gift_card_charged_amount'] = $balanceAmount;
 								}
 								
@@ -170,7 +170,7 @@ class EEG_Secure_Submit_Payment_Method_Onsite extends EE_Onsite_Gateway{
 
 									$result["status"] = 1;
 									$result["msg"] = "Gift card and credit card transaction were completed successfully.&nbsp; " . $balanceAmount . " was used from the submitted gift card.&nbsp; The submitted credit card was charged the remaining amount of " . ($amount - $balanceAmount) . ".&nbsp; [Gift Card Transaction ID# " . $gcResponse->transactionId . " - Credit Card Transaction ID# ".$response->transactionId."]";
-									$result['txid'] .= (isset($result['txid']) && !empty($result['txid']) ? ' and ' : '') . 'Credit Card TXN ID ' . $response->transactionId;
+									$result['txid'] .= (isset($result['txid']) && !empty($result['txid']) ? ' and ' : '') . 'Credit Card Charged ' . ($amount - $balanceAmount) . ' with TXN ID ' . $response->transactionId;
 									$payment_data['txn_type'] = 'GiftCard&CreditCard';
 									$payment_data['credit_card_charged_amount'] = ($amount - $balanceAmount);
 									$payment_data['last_four_cc'] = substr($billing_info['card_number'], -4);
