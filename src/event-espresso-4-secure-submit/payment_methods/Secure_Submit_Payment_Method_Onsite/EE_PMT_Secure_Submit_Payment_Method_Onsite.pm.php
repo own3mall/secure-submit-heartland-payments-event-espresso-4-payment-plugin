@@ -128,7 +128,7 @@ class EE_PMT_Secure_Submit_Payment_Method_Onsite extends EE_PMT_Base{
 			) );
 			return $form;
 		}else{
-			('<p style="color: red; font-weight: bold;">Secure Submit cannot currently be used as a payment method.&nbsp; The site administrator has not yet configured their Secure Submit Payment Settings API keys!</p>');
+			echo '<p style="color: red; font-weight: bold;">Secure Submit cannot currently be used as a payment method.&nbsp; The site administrator has not yet configured their Secure Submit Payment Settings API keys!</p>';
 		}
 	}
 
