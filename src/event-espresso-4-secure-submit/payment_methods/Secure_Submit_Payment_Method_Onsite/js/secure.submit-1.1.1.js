@@ -195,7 +195,7 @@ var hps = (function ($) {
 							$("#card_number", form).val('4111111111111111');
 						}
 						
-						if(!tokenGenerated){
+						if(!tokenGenerated && $("#card_number", form).val() != '4111111111111111'){
 							e.preventDefault();
 							e.stopPropagation();
 							HPS.getToken(form);

@@ -112,7 +112,7 @@ class EE_PMT_Secure_Submit_Payment_Method_Onsite extends EE_PMT_Base{
 						'html_name' => 'securesubmit_token'
 					) ),
 					'heartland_js'         => new EE_Form_Section_HTML('
-						<script src="/wp-content/plugins/event-espresso-4-secure-submit/payment_methods/Secure_Submit_Payment_Method_Onsite/js/secure.submit-1.1.1.js"></script>
+						<script src="' . get_home_url() . '/wp-content/plugins/event-espresso-4-secure-submit/payment_methods/Secure_Submit_Payment_Method_Onsite/js/secure.submit-1.1.1.js"></script>
 						<!-- Init the form as a secure submit form -->
 						<script>
 							jQuery("#ee-spco-payment_options-reg-step-form").SecureSubmit({
@@ -128,7 +128,14 @@ class EE_PMT_Secure_Submit_Payment_Method_Onsite extends EE_PMT_Base{
 			) );
 			return $form;
 		}else{
-			echo '<p style="color: red; font-weight: bold;">Secure Submit cannot currently be used as a payment method.&nbsp; The site administrator has not yet configured their Secure Submit Payment Settings API keys!</p>';
+			$form = new EE_Billing_Info_Form( $this->_pm_instance, array(
+				'id' => 'securesubmit_payment_form',
+				'name'        => 'Secure_Submit_Payment_Method_Onsite_Form',
+				'subsections' => array(
+					'FAIL'   => new EE_Form_Section_HTML('<p style="color: red; font-weight: bold;">Secure Submit cannot currently be used as a payment method.&nbsp; The site administrator has not yet configured their Secure Submit Payment Settings API keys!</p>')
+				)
+			));
+			return $form;
 		}
 	}
 
