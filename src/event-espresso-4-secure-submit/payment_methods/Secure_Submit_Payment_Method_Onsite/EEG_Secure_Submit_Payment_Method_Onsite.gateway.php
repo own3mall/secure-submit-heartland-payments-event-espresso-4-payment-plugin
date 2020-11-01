@@ -66,8 +66,13 @@ class EEG_Secure_Submit_Payment_Method_Onsite extends EE_Onsite_Gateway{
 		$tokenValue = $_POST["securesubmit_token"];
 		$this->log( $billing_info, $payment );
 		
-		// die("secret key is " . $this->_secret_key . " and token is " . $tokenValue . "<br><br>" . "POST IS<br>" . print_r($_POST, true) . "<br><br>" . print_r($billing_info, true) . "<br><br>" . print_r($payment, true));
-		
+		// Make sure we have a secret key set
+		if($this->_secret_key == null){
+			$payment->set_status( $this->_pay_model->failed_status() );
+			$payment->set_gateway_response("Secure Submit secret key must be set before payments can be properly processed.");
+			return $payment;
+		}
+
 		if((isset($tokenValue) && !empty($tokenValue)) || !empty($billing_info['securesubmit_giftcardnumber'])){
 			
 			$result = array();

@@ -30,7 +30,7 @@ var hps = (function ($) {
 			}
 
             var d = new Date();
-            if (parseInt($.trim($("exp_year"))) < d.getFullYear()) {
+            if (parseInt($.trim($("exp_year")), 10) < d.getFullYear()) {
 				HPS.error("The expiration year is in the past.");
 				return;
             }
@@ -83,7 +83,7 @@ var hps = (function ($) {
 
 
             var d = new Date();
-            if (parseInt($.trim(options.data.exp_year)) < d.getFullYear()) {
+            if (parseInt($.trim(options.data.exp_year), 10) < d.getFullYear()) {
                 options.error("The expiration year is in the past.");
                 return;
             }
@@ -190,20 +190,23 @@ var hps = (function ($) {
             
             setTimeout(function(){ 
 				$("#spco-go-to-step-finalize_registration-submit").click(function(e){
-					if(!$("#card_number", form).val() && $("#securesubmit_giftcardnumber", form).val()){
-						$("#card_number", form).val('4111111111111111');
+					if($("input#ee-available-payment-method-inputs-secure_submit_payment_method_onsite").is(':checked')){
+						if(!$("#card_number", form).val() && $("#securesubmit_giftcardnumber", form).val()){
+							$("#card_number", form).val('4111111111111111');
+						}
+						
+						if(!tokenGenerated){
+							e.preventDefault();
+							e.stopPropagation();
+							HPS.getToken(form);
+						}
 					}
-					
-					if(!tokenGenerated){
-						e.preventDefault();
-						e.stopPropagation();
-						HPS.getToken(form);
-					}
-					
 				});
 				
 				$("#card_number, #exp_month, #exp_year, #card_cvc", form).on('change keyup', function(e){
-					tokenGenerated = false;
+					if($("input#ee-available-payment-method-inputs-secure_submit_payment_method_onsite").is(':checked')){
+						tokenGenerated = false;
+					}
 				});
 			}, 2000);
             
@@ -213,11 +216,7 @@ var hps = (function ($) {
     $.fn.SecureSubmit = function (options) {
 
         return this.each(function () {
-            if (!$(this).is("form") ||
-                typeof options !== 'object'
-                || $.hasData($(this))
-                ) {
-
+            if(!$(this).is("form") || typeof options !== 'object' || $.hasData($(this))){
                 return;
             }
 
